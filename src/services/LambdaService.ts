@@ -16,6 +16,8 @@ const lambdaInvokeEndpoints = Configuration.getInstance().getEndpoints();
 export class LambdaService {
     public static invoke(lambdaName: any, lambdaEvent: any) {
         const lambda = new AWS.Lambda(lambdaInvokeEndpoints.params);
+        console.log("Invoking function ", lambdaName);
+        console.log("With the following params ", lambdaInvokeEndpoints);
 
         return lambda.invoke({
             FunctionName: lambdaName,
@@ -24,6 +26,8 @@ export class LambdaService {
         }).promise().then((data: any) => {
             const payload = validateInvocationResponse(data);
             return JSON.parse(payload.body);
+        }).catch((error: any) => {
+            console.log("Received the following error while invoking tech-records", error);
         });
     }
 }
