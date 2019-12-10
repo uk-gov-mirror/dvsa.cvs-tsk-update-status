@@ -9,7 +9,13 @@ export async function updateTechRecordStatus(event: SQSEvent) {
 
     event.Records.forEach((record: SQSRecord) => {
         const data = JSON.parse(record.body);
-        UpdateTechRecordService.updateStatusByVin(data.vin, data.newStatus);
+        UpdateTechRecordService.updateStatusByVin(data.vin, data.newStatus)
+            .then((response: any) => {
+                console.log("updateStatusByVin returned the following response ", response);
+            })
+            .catch((error: any) => {
+                console.log("updateStatusByVin failed with ", error);
+            });
     });
 }
 
