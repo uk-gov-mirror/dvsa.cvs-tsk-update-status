@@ -27,8 +27,6 @@ export class LambdaService {
             console.log("received the following data ", data);
             const payload = validateInvocationResponse(data);
             return JSON.parse(payload.body);
-        }).catch((error: any) => {
-            console.log("Received the following error while invoking tech-records", error);
         });
     }
 }
