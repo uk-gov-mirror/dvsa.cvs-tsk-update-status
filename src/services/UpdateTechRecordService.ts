@@ -5,7 +5,7 @@ import {HTTPMethods} from "../models/enum";
 export class UpdateTechRecordService {
     public static updateStatusByVin(vin: string, testStatus: string, testResult: string, testTypeId: number, newStatus: string) {
         const event = {
-            path: "/vehicles/update-status" + vin,
+            path: "/vehicles/update-status/" + vin,
             pathParameters: {
                 vin,
             },
