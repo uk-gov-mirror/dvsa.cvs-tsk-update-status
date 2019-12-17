@@ -10,8 +10,12 @@ export function updateTechRecordStatus(event: SQSEvent) {
     const promisesArray: Array<Promise<any>> = [];
 
     event.Records.forEach((record: SQSRecord) => {
-        const data = JSON.parse(record.body);
-        const promise = UpdateTechRecordService.updateStatusByVin(data.vin, data.newStatus)
+        const test = JSON.parse(record.body);
+        const promise = UpdateTechRecordService.updateStatusByVin(test.vin,
+            test.testStatus,
+            test.testResult,
+            test.testTypeId,
+            test.newStatus)
             .then((response: any) => {
                 console.log("updateStatusByVin returned the following response ", response);
             });

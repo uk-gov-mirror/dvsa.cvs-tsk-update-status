@@ -18,6 +18,7 @@ export class LambdaService {
         const lambda = new AWS.Lambda(lambdaInvokeEndpoints.params);
         console.log("Trying to invoke function ", lambdaName);
         console.log("With the following params ", lambdaInvokeEndpoints);
+        console.log(lambdaEvent);
 
         return lambda.invoke({
             FunctionName: lambdaName,

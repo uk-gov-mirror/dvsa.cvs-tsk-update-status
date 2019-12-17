@@ -3,18 +3,20 @@ import {Configuration} from "../utils/Configuration";
 import {HTTPMethods} from "../models/enum";
 
 export class UpdateTechRecordService {
-    public static updateStatusByVin(vin: string, newStatus: string) {
-
+    public static updateStatusByVin(vin: string, testStatus: string, testResult: string, testTypeId: number, newStatus: string) {
         const event = {
-            path: "/vehicles/" + vin,
-            queryStringParameters: {
-                newStatus
-            },
+            path: "/vehicles/update-status" + vin,
             pathParameters: {
-                vin
+                vin,
             },
-            httpMethod: HTTPMethods.POST,
-            resource: "/vehicles/{vin}"
+            queryStringParameters: {
+                testStatus,
+                testResult,
+                testTypeId,
+                newStatus,
+            },
+            httpMethod: HTTPMethods.PUT,
+            resource: "/vehicles/update-status/{vin}"
         };
 
         return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateTechRecordStatus.name, event);
