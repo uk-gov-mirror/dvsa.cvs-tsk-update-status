@@ -1,4 +1,6 @@
 import {updateTechRecordStatus} from "../../src/functions/updateTechRecordStatus";
+import event from "../resources/queue-event.json";
+import {LambdaService} from "../../src/services/LambdaService";
 
 context("when a failing test result is read from the queue", () => {
     context("and the event is empty", () => {
@@ -12,7 +14,7 @@ context("when a failing test result is read from the queue", () => {
         });
     });
     context("and the event has no records", () => {
-        it("should thrown an error", async () => {
+        it("should throw an error", async () => {
             expect.assertions(1);
             try {
                 await updateTechRecordStatus({otherStuff: "hi", Records: []} as any);
@@ -20,5 +22,16 @@ context("when a failing test result is read from the queue", () => {
                 expect(err.message).toEqual("Event is empty");
             }
         });
+    });
+});
+
+context("when invoking the function with ", () => {
+    it("should correctly process the record", async () => {
+        LambdaService.invoke = jest.fn().mockReturnValue(Promise.resolve("test value"));
+        expect.assertions(2);
+        const resp = await updateTechRecordStatus(event as any);
+        expect(resp).toEqual(["test value"]);
+        expect(LambdaService.invoke).toHaveBeenCalledTimes(1);
+
     });
 });
