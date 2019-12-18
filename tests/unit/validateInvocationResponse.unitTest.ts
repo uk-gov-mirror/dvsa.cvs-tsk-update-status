@@ -52,4 +52,19 @@ describe("validateInvocationResponse", () => {
             expect(parsedPayload.statusCode).toEqual(200);
         });
     });
+
+    context("when payload is empty", () => {
+        it("should throw an error with a descriptive message", () => {
+            expect.assertions(2);
+            try {
+                const parsedPayload = validateInvocationResponse({
+                    StatusCode: 200,
+                    Payload: ""
+                });
+            } catch (error) {
+                expect(error.statusCode).toBe(200);
+                expect(error.body).toBe("Lambda invocation returned error: 200 with empty payload.");
+            }
+        });
+    });
 });
