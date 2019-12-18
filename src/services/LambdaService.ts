@@ -16,16 +16,12 @@ const lambdaInvokeEndpoints = Configuration.getInstance().getEndpoints();
 export class LambdaService {
     public static invoke(lambdaName: any, lambdaEvent: any) {
         const lambda = new AWS.Lambda(lambdaInvokeEndpoints.params);
-        console.log("Trying to invoke function ", lambdaName);
-        console.log("With the following params ", lambdaInvokeEndpoints);
-        console.log(lambdaEvent);
 
         return lambda.invoke({
             FunctionName: lambdaName,
             InvocationType: "RequestResponse",
             Payload: JSON.stringify(lambdaEvent)
         }).promise().then((data: any) => {
-            console.log("received the following data ", data);
             const payload = validateInvocationResponse(data);
             return JSON.parse(payload.body);
         });

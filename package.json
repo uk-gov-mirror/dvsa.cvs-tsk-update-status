@@ -14,12 +14,13 @@
     "build": "node_modules/typescript/bin/tsc --rootDir ./ --outDir .build --sourceMap false && npm run build:copy",
     "build:copy": "find src -type f \\( -name \"*.yml\" -or -name \"*.json\" \\) | cpio -pdm .build && find tests -type f \\( -name \"*.yml\" -or -name \"*.json\" -or -name \"*.base64\" \\)  | cpio -pdm .build",
     "test": "BRANCH=local AWS_XRAY_CONTEXT_MISSING=LOG_ERROR jest --testMatch=\"**/*.unitTest.ts\" --coverage",
-    "test-i": "BRANCH=local jest --testMatch=\"**/*.intTest.ts\" --runInBand",
+    "test-i": "BRANCH=local jest --testMatch=\"**/*.intTest.ts\" --runInBand --passWithNoTests",
     "tslint": "tslint src/**/*.ts tests/**/*.ts -q",
     "security-checks": "git secrets --scan && git log -p | scanrepo",
     "sonar-scanner": "BRANCH=local npm run tslint && npm run coverage && sonar-scanner",
     "coverage": "BRANCH=local SLS_DEBUG=* jest --testMatch=\"**/*.*Test.ts\" --coverage",
-    "audit-dep": "npm audit"
+    "audit-dep": "npm audit",
+    "debug": "export SLS_DEBUG=* && BRANCH=local node --inspect ./node_modules/serverless/bin/serverless offline start"
   },
   "author": "",
   "license": "MIT",
@@ -32,12 +33,13 @@
     "ts-node-register": "^1.0.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.144",
-    "@types/lambda-tester": "^3.6.0",
     "@types/jest": "^24.0.21",
     "@types/jest-plugin-context": "^2.9.2",
+    "@types/lambda-tester": "^3.6.0",
+    "@types/lodash": "^4.14.144",
     "@types/node": "^12.12.5",
     "@types/request-promise": "^4.1.44",
+    "aws-lambda-mock-context": "^3.2.1",
     "gulp": "^4.0.2",
     "husky": "^3.0.9",
     "jest": "^24.9.0",

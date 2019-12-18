@@ -3,7 +3,6 @@ import {UpdateTechRecordService} from "../services/UpdateTechRecordService";
 
 export function updateTechRecordStatus(event: SQSEvent) {
     if (!event || !event.Records || !Array.isArray(event.Records) || !event.Records.length) {
-        console.error("ERROR: event is not defined.");
         throw new Error("Event is empty");
     }
 
@@ -15,10 +14,7 @@ export function updateTechRecordStatus(event: SQSEvent) {
             test.testStatus,
             test.testTypes.testResult,
             test.testTypes.testTypeId,
-            test.newStatus)
-            .then((response: any) => {
-                console.log("updateStatusByVin returned the following response ", response);
-            });
+            test.newStatus);
         promisesArray.push(promise);
     });
 
