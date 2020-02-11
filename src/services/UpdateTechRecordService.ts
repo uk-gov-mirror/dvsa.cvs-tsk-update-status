@@ -21,4 +21,20 @@ export class UpdateTechRecordService {
 
         return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateTechRecordStatus.name, event);
     }
+
+   public static updateEuVehicleCategory(vin: string, euVehicleCategory: string) {
+        const event = {
+            path: "/vehicles/update-eu-vehicle-category/" + vin,
+            pathParameters: {
+                vin,
+            },
+            queryStringParameters: {
+                euVehicleCategory
+            },
+            httpMethod: HTTPMethods.PUT,
+            resource: "/vehicles/update-eu-vehicle-category/:vin"
+        };
+
+        return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateEuVehicleCategory.name, event);
+    }
 }
