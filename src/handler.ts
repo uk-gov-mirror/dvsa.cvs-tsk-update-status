@@ -1,4 +1,4 @@
-import { updateTechRecordStatus } from "./functions/updateTechRecordStatus";
+import { updateTechRecord } from "./functions/updateTechRecord";
 import {config as AWSConfig} from "aws-sdk";
 
 const isOffline: boolean = (!process.env.BRANCH || process.env.BRANCH === "local");
@@ -10,4 +10,4 @@ if (isOffline) {
     };
 }
 
-export {updateTechRecordStatus as handler};
+export {updateTechRecord as handler};
