@@ -5,8 +5,8 @@ import {UpdateTechRecordService} from "../../src/services/UpdateTechRecordServic
 
 context("When invoking the handler", () => {
     it("it should call the service with the correct parameters", async () => {
-        UpdateTechRecordService.updateStatusByVin = jest.fn().mockReturnValue(Promise.resolve("test value"));
-        const resp = await handler(event as any);
-        expect(UpdateTechRecordService.updateStatusByVin).toHaveBeenCalledWith("XMGDE02FS0H012345", "submitted", "fail", "1", undefined);
+        UpdateTechRecordService.updateStatusBySystemNumber = jest.fn().mockReturnValue(Promise.resolve("test value"));
+        await handler(event as any);
+        expect(UpdateTechRecordService.updateStatusBySystemNumber).toHaveBeenCalledWith("abc123", "submitted", "fail", "1", undefined);
     });
 });

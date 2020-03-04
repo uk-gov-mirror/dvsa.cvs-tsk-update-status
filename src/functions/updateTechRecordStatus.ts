@@ -10,7 +10,7 @@ export function updateTechRecordStatus(event: SQSEvent) {
 
     event.Records.forEach((record: SQSRecord) => {
         const test = JSON.parse(record.body);
-        const promise = UpdateTechRecordService.updateStatusByVin(test.vin,
+        const promise = UpdateTechRecordService.updateStatusBySystemNumber(test.systemNumber,
             test.testStatus,
             test.testTypes.testResult,
             test.testTypes.testTypeId,
