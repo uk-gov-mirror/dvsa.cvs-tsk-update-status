@@ -16,7 +16,7 @@ export function updateTechRecord(event: SQSEvent) {
             test.testTypes.testTypeId,
             test.newStatus);
         if (test.euVehicleCategory) {
-            const promiseUpdateEuCategory = UpdateTechRecordService.updateEuVehicleCategory(test.vin, test.euVehicleCategory);
+            const promiseUpdateEuCategory = UpdateTechRecordService.updateEuVehicleCategory(test.systemNumber, test.euVehicleCategory);
             promisesArray.push(promiseUpdateEuCategory);
         }
         promisesArray.push(promiseUpdateStatus);
