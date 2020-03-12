@@ -24,7 +24,7 @@ export class UpdateTechRecordService {
 
    public static updateEuVehicleCategory(systemNumber: string, euVehicleCategory: string) {
         const event = {
-            path: `/vehicles/${systemNumber}/update-eu-vehicle-category`,
+            path: `/vehicles/update-eu-vehicle-category/${systemNumber}`,
             pathParameters: {
                 systemNumber,
             },
@@ -32,7 +32,7 @@ export class UpdateTechRecordService {
                 euVehicleCategory
             },
             httpMethod: HTTPMethods.PUT,
-            resource: "/vehicles/:systemNumber/update-eu-vehicle-category"
+            resource: "/vehicles/update-eu-vehicle-category/:systemNumber"
         };
 
         return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateEuVehicleCategory.name, event);
