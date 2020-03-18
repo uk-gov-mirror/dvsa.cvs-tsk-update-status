@@ -10,6 +10,7 @@ export function updateTechRecord(event: SQSEvent) {
 
     event.Records.forEach((record: SQSRecord) => {
         const test = JSON.parse(record.body);
+        console.log("payload recieved from queue:", test);
         const promiseUpdateStatus = UpdateTechRecordService.updateStatusBySystemNumber(test.systemNumber,
             test.testStatus,
             test.testTypes.testResult,

@@ -18,7 +18,7 @@ export class UpdateTechRecordService {
             httpMethod: HTTPMethods.PUT,
             resource: "/vehicles/update-status/{sysNum}"
         };
-
+        console.log("payload for update status:", event);
         return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateTechRecordStatus.name, event);
     }
 
@@ -34,7 +34,7 @@ export class UpdateTechRecordService {
             httpMethod: HTTPMethods.PUT,
             resource: "/vehicles/update-eu-vehicle-category/:systemNumber"
         };
-
+        console.log("payload for update euVehicleCategory: ", event);
         return LambdaService.invoke(Configuration.getInstance().getEndpoints().functions.updateEuVehicleCategory.name, event);
     }
 }
