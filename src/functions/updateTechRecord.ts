@@ -23,7 +23,10 @@ export function updateTechRecord(event: SQSEvent) {
         promisesArray.push(promiseUpdateStatus);
     });
 
-    return Promise.all(promisesArray)
+    return Promise.all(promisesArray).then((results) => {
+        console.log("resolved promises:", results);
+        return results;
+    })
         .catch((error: Error) => {
             console.error("an error occurred in the promises", error);
             throw error;
