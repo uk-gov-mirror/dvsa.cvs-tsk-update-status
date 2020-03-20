@@ -7,9 +7,13 @@ endpoints:
     functions:
       updateTechRecordStatus:
         name: cvs-svc-global-dev-updateTechRecordStatus
+      updateEuVehicleCategory:
+        name: cvs-svc-global-dev-updateEuVehicleCategory  
   remote:
     params:
       apiVersion: '2015-03-31'
     functions:
       updateTechRecordStatus:
+        name: technical-records-${BRANCH}
+      updateEuVehicleCategory:
         name: technical-records-${BRANCH}
