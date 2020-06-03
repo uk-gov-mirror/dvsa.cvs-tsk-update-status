@@ -3,7 +3,7 @@ import {Configuration} from "../utils/Configuration";
 import {HTTPMethods} from "../models/enum";
 
 export class UpdateTechRecordService {
-    public static updateStatusBySystemNumber(systemNumber: string, testStatus: string, testResult: string, testTypeId: number, newStatus: string) {
+    public static updateStatusBySystemNumber(systemNumber: string, testStatus: string, testResult: string, testTypeId: number, newStatus: string, createdById: string, createdByName: string) {
         const event = {
             path: "/vehicles/update-status/" + systemNumber,
             pathParameters: {
@@ -14,6 +14,8 @@ export class UpdateTechRecordService {
                 testResult,
                 testTypeId,
                 newStatus,
+                createdById,
+                createdByName
             },
             httpMethod: HTTPMethods.PUT,
             resource: "/vehicles/update-status/{sysNum}"
