@@ -9,6 +9,6 @@ context("When invoking the handler", () => {
         UpdateTechRecordService.updateEuVehicleCategory = jest.fn().mockReturnValue(Promise.resolve("test value"));
         const resp = await handler(event as any);
         expect(UpdateTechRecordService.updateStatusBySystemNumber).toHaveBeenCalledWith("abc123", "submitted", "fail", "1", undefined, "1234", "dorel");
-        expect(UpdateTechRecordService.updateEuVehicleCategory).toHaveBeenCalledWith("abc123", "m1");
+        expect(UpdateTechRecordService.updateEuVehicleCategory).toHaveBeenCalledWith("abc123", "m1", "1234", "dorel");
     });
 });
